@@ -24,10 +24,7 @@ async function startServer() {
     res.send('Hello from express apollo server');
   });
 
-  await mongoose.connect(`${process.env.MONGO_URI}/post_db`, {
-    useUnifiedTopology: true, // Corrected option name
-    useNewUrlParser: true,
-  });
+  await mongoose.connect(`${process.env.MONGO_URI}/post_db`);
   console.log('Mongoose connection established');
   
   app.listen(4001, () => console.log('Server is running'));
