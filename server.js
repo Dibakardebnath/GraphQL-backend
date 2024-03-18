@@ -9,6 +9,7 @@ const dotenv=require("dotenv");
 async function startServer() {
   const app = express();
   dotenv.config();
+  
   const apolloServer = new ApolloServer({
     typeDefs,
     resolver,
@@ -24,7 +25,7 @@ async function startServer() {
     res.send('Hello from express apollo server');
   });
 
-  await mongoose.connect(`${process.env.MONGO_URI}/post_db`);
+  await mongoose.connect(process.env.MONGO_URI);
   console.log('Mongoose connection established');
   
   app.listen(4001, () => console.log('Server is running'));
