@@ -9,10 +9,17 @@ const dotenv=require("dotenv");
 async function startServer() {
   const app = express();
   dotenv.config();
-  
+
   const apolloServer = new ApolloServer({
     typeDefs,
     resolver,
+    cacheControl: {
+      defaultMaxAge: 3600,
+      cacheHint: { maxAge: 3600, scope: 'PUBLIC' } 
+    },
+    persistedQueries: {
+      cache: new MapCache({ maxSize: 1000 }) 
+    }
   });
 
   await apolloServer.start();
