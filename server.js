@@ -13,13 +13,7 @@ async function startServer() {
   const apolloServer = new ApolloServer({
     typeDefs,
     resolver,
-    cacheControl: {
-      defaultMaxAge: 3600,
-      cacheHint: { maxAge: 3600, scope: 'PUBLIC' } 
-    },
-    persistedQueries: {
-      cache: new MapCache({ maxSize: 1000 }) 
-    }
+    persistedQueries: false
   });
 
   await apolloServer.start();
