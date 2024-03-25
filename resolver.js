@@ -16,17 +16,22 @@ const resolver={
         }
     },
     Mutation :{
-        createPost:async(parent, arg, context, info)=>{
-            const{title, description} = arg.post
-            try {
-                const post = new Post({ title, description });
-                await post.save();
-                return post;
-              } catch (error) {
-                console.error('Error creating post:', error);
-                throw new Error('Could not create post');
-              }
-        },
+      createPost: async (parent, arg, context, info) => {
+        const { title, description } = arg.post;
+        console.log('Received title:', title);
+        console.log('Received description:', description);
+      
+        try {
+          const post = new Post({ title, description });
+          await post.save();
+          console.log('Post saved successfully:', post);
+          return post;
+        } catch (error) {
+          console.error('Error creating post:', error);
+          throw new Error('Could not create post');
+        }
+      },
+      
         registerUser: async (_, { username, email, password }) => {
             // Check if the email is already registered
             const existingUser = await User.findOne({ email });
